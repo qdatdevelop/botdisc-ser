@@ -31,7 +31,7 @@ const client = new Client({
 
 // ==== CẤU HÌNH ====
 const VERIFY_CHANNEL_ID = "1389751213771460608"; // Kênh nhận ảnh
-const VERIFIED_ROLE_ID = "1355227159681175746";  // Role xác minh
+const VERIFIED_ROLE_ID = "1343245751177711656";  // Role xác minh
 const LOG_CHANNEL_ID = "1389751363617165342";    // Kênh thông báo log
 
 let pending = {};
