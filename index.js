@@ -30,9 +30,9 @@ const client = new Client({
 });
 
 // ==== CẤU HÌNH ====
-const VERIFY_CHANNEL_ID = "1388212621710332099"; // Kênh nhận ảnh
-const VERIFIED_ROLE_ID = "1388180240425156829";  // Role xác minh
-const LOG_CHANNEL_ID = "1388212907350691992";    // Kênh thông báo log
+const VERIFY_CHANNEL_ID = "1389751213771460608"; // Kênh nhận ảnh
+const VERIFIED_ROLE_ID = "1355227159681175746";  // Role xác minh
+const LOG_CHANNEL_ID = "1389751363617165342";    // Kênh thông báo log
 
 let pending = {};
 
