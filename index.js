@@ -40,10 +40,31 @@ let pending = {};
 client.once("ready", () => {
   console.log(`🤖 Bot đã đăng nhập: ${client.user.tag}`);
 
-  if (fs.existsSync("data.json")) {
-    pending = JSON.parse(fs.readFileSync("data.json"));
-    console.log(`📦 Khôi phục ${Object.keys(pending).length} ảnh chờ xác minh`);
-  }
+  (async () => {
+    const channel = await client.channels.fetch(VERIFY_CHANNEL_ID);
+    pending = fs.existsSync("data.json")
+      ? JSON.parse(fs.readFileSync("data.json"))
+      : {};
+
+    // Quét lại 50 tin nhắn gần nhất
+    const messages = await channel.messages.fetch({ limit: 50 });
+    messages.forEach(async (msg) => {
+      if (
+        msg.attachments.size > 0 &&
+        !pending[msg.id] &&
+        !msg.author.bot
+      ) {
+        pending[msg.id] = msg.author.id;
+        await msg.react("✅");
+        await msg.react("❌");
+        console.log(`📦 Phát hiện ảnh cũ từ ${msg.author.tag}`);
+      }
+    });
+
+    fs.writeFileSync("data.json", JSON.stringify(pending, null, 2));
+    console.log(`✅ Quét xong kênh xác minh.`);
+  })();
+
 });
 
 // ==== NHẬN ẢNH TỪ USER ====
